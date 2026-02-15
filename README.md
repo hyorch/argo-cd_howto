@@ -1,6 +1,10 @@
 # argo-cd_howto
 Argo-CD HowTo Doc
 
+Demo repo: https://github.com/sidd-harth/gitops-argocd
+
+
+## Install
 ```bash
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.9/manifests/install.yaml
@@ -15,5 +19,6 @@ wget https://github.com/argoproj/argo-cd/releases/download/v2.14.9/argocd-linux-
 mv argocd-linux-amd64 argocd
 chmod +x argocd 
 mv argocd /usr/bin/
-
 ```
+
+## Create Application
