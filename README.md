@@ -21,4 +21,16 @@ chmod +x argocd
 mv argocd /usr/bin/
 ```
 
-## Create Application
+## Create Application and Projects
+
+```bash
+argocd app list
+k -n argo-cd get app
+k -n argo-cd get appproj
+
+argocd app create solar-system-app-2 --repo https://3000-port-4sfx47qep53aadt5.labs.kodekloud.com/bob/gitops-argocd.git \
+--dest-server https://kubernetes.default.svc \
+--path ./solar-system --dest-name space solar-system
+
+argocd app sync solar-system-app-2
+``` 
