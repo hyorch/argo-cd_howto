@@ -42,3 +42,30 @@ kubectl -n argocd patch configmap argocd-cm --patch='{"data":{"timeout.reconcili
 k -n argocd rollout restart deployment argocd-repo-server
 k -n argocd get cm argocd-cm -o yaml
 ```
+## Healtch Checks
+```yaml
+apiVersion: v1
+data:
+  resource.customizations.health.ConfigMap: |
+    hs = {}
+    hs.status = "Healthy"
+    if obj.data.TRIANGLE_COLOR == "white" then
+      hs.status = "Degraded"
+      hs.message = "Use any color other than White"
+    end
+    return hs
+  timeout.reconciliation: 300s
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"argocd-cm","app.kubernetes.io/part-of":"argocd"},"name":"argocd-cm","namespace":"argocd"}}
+  creationTimestamp: "2026-02-16T15:40:01Z"
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cm
+  namespace: argocd
+  resourceVersion: "1477"
+  uid: 4be1bb4f-ba9f-403b-b4a7-ce763b9a2c57
+```
