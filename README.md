@@ -34,3 +34,11 @@ argocd app create solar-system-app-2 --repo https://3000-port-4sfx47qep53aadt5.l
 
 argocd app sync solar-system-app-2
 ``` 
+
+## Reconciliation Loops
+
+```bash
+kubectl -n argocd patch configmap argocd-cm --patch='{"data":{"timeout.reconciliation":"300s"}}'
+k -n argocd rollout restart deployment argocd-repo-server
+k -n argocd get cm argocd-cm -o yaml
+```
